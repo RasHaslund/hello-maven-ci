@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ main ]
 
-# Required for pushing to GHCR
 permissions:
   contents: read
   packages: write
@@ -40,7 +39,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-     - name: Build and push Docker image
+    - name: Build and push Docker image
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
         docker build -t ghcr.io/rashaslund/hello-maven:latest .
